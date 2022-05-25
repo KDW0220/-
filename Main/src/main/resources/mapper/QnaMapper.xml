@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.QnaMapper">
+    <select id="list" resultType="com.example.domain.QnaVO">
+        select * from tbl_qna
+    </select>
+    <select id="read" resultType="com.example.domain.QnaVO">
+       select * from tbl_qna
+       where qno=#{qno}
+    </select>
+    <insert id="insert">
+    	insert into tbl_qna(qtitle,qwriter,qcontent)
+    	values(#{qtitle},#{qwriter}, #{qcontent})
+    </insert>
+    <update id="update">
+    	update tbl_qna
+    	set  qtitle=#{qtitle}, qcontent=#{qcontent}
+    	where qno=#{qno}
+    </update>
+    <delete id="delete">
+    	delete from tbl_qna where qno=#{qno}
+    </delete>
+</mapper>

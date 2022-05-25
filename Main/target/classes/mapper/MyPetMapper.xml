@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.MyPetMapper">
+    <select id="list" resultType="com.example.domain.MyPetVO">
+        select * from tbl_mpboard
+        <if test="keyword !=null">
+        	<if test="searchType != null">
+				<if test="searchType.equals('mpcontent')">
+					where mptitle like concat('%',#{keyword},'%')
+					or mpcontent like concat('%',#{keyword},'%')
+				</if>
+				<if test="searchType.equals('mpwriter')">
+					where mpwriter like concat('%',#{keyword},'%')
+				</if>
+			</if>
+        </if>
+        order by mpno desc
+        limit #{pageStart}, #{perPageNum}
+    </select>
+    <select id="count" resultType="int">
+    	select count(*) from tbl_mpboard
+    	<if test="keyword !=null">
+        	where mptitle like concat('%', #{keyword}, '%')
+       	 	or mpcontent like concat('%', #{keyword}, '%') 
+        	or mpwriter like concat('%', #{keyword}, '%')
+        </if>
+    </select>
+    <insert id="insert">
+    	insert into tbl_mpboard(mptitle,mpcontent,mpimage,mpwriter,uimage,likeImg)
+    	values(#{mptitle},#{mpcontent},#{mpimage},#{mpwriter},#{uimage},'/resources/like.png')
+    </insert>
+    <select id="read" resultType="com.example.domain.MyPetVO">
+    	select * from tbl_mpboard
+    	where mpno=#{mpno}
+    </select>
+    <update id="update">
+    	update tbl_mpboard
+    	set  mpwriter=#{mpwriter}, mpcontent=#{mpcontent}, mptitle=#{mptitle}
+    	where mpno=#{mpno}
+    </update>
+    <delete id="delete">
+    	delete from tbl_mpboard where mpno=#{mpno}
+    </delete>
+    <update id="like">
+		update tbl_mpboard 
+		set mpcount=#{mpcount}+mpcount , likeImg=#{likeImg}
+		where mpno=#{mpno}
+	</update>
+</mapper>

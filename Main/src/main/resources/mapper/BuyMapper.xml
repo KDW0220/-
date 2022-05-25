@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.BuyMapper">
+    <insert id="insert">
+        insert into tbl_buy(uid,btitle,bname,bnickname,bphone,bemail,baddress,bsum,bimage,blink)
+        values(#{uid}, #{btitle},#{bname},#{bnickname},#{bphone},#{bemail},#{baddress},#{bsum},#{bimage},#{blink})
+    </insert>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.CartMapper">
+    <select id="check" resultType="com.example.domain.CartVO">
+        select * from tbl_cart
+        where link = #{link}
+    </select>
+    <select id="total" resultType="int">
+       select count(*) from tbl_cart
+    </select>
+    <select id="read" resultType="com.example.domain.CartVO">
+    	select * from tbl_cart where id=#{id}
+    </select>
+    <delete id="delete">
+    	delete from tbl_cart where id=#{id}
+    </delete>
+    <update id="update">
+    	update tbl_cart
+    	set title=#{title},image=#{image},price=#{price},link=#{link}
+    	where id=#{id}
+    </update>
+    <select id="list" resultType="com.example.domain.CartVO">
+        select c.*,u.*
+		from tbl_user u,tbl_cart c
+		where u.uid=c.uid and u.uid=#{uid};
+    </select>
+    <select id="readuser" resultType="com.example.domain.CartVO">
+        select c.*,u.*
+		from tbl_user u,tbl_cart c
+		where u.uid=c.uid and u.uid=#{uid}
+		limit 0,1
+    </select>
+    <select id="sum" resultType="int">
+   		select sum(price) 
+   		from tbl_cart
+   		where uid=#{uid}
+    </select>
+</mapper>

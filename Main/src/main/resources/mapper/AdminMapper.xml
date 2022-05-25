@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.AdminMapper">
+    <select id="list" resultType="com.example.domain.ShopVO">
+        select * from tbl_shop
+        limit #{pageStart}, #{perPageNum}
+    </select>
+    <insert id="admininsert">
+       insert into tbl_shop(title, image, price)
+       values(#{title}, #{image}, #{price})
+    </insert>
+    <update id="adminupdate">
+    	update tbl_shop
+    	set  title=#{title}, image=#{image}, price=#{price}
+    	where id=#{id}
+    </update>
+    <delete id="admindelete">
+    	delete from tbl_shop where id=#{id}
+    </delete>    
+    <select id="alltrade" resultType="com.example.domain.BuyVO">
+       select * from tbl_buy
+       order by bdate desc
+    </select>
+    <select id="userlist" resultType="com.example.domain.UserVO">
+        select * from tbl_user
+    </select>
+    <select id="read" resultType="com.example.domain.ShopVO">
+    	select * from tbl_shop 
+    	where id=#{id}
+    </select>
+    <select id="total" resultType="int">
+       select count(*) from tbl_shop
+    </select>
+    <delete id="delete">
+    	delete from tbl_shop where id=#{id}
+    </delete>
+    <update id="statusUpdate">
+	    update tbl_user
+	    set status=#{status}
+	    where uid=#{uid}
+    </update>
+</mapper>

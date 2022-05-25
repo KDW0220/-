@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.MysqlMapper">
+    <select id="product" resultType="com.example.domain.ShopVO">
+        select * from tbl_shop
+        order by id desc
+        limit 0,4
+    </select>
+    <select id="community" resultType="com.example.domain.BoardVO">
+    	select * from tbl_board
+    	order by bno desc
+    	limit 0,7
+    </select>
+    <select id="mypet" resultType="com.example.domain.MyPetVO">
+    	select * from tbl_mpboard
+    	order by mpno desc
+    	limit 0,4
+    </select>
+</mapper>

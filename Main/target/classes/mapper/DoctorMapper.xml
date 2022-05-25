@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.DoctorMapper">
+   <update id="update">
+      update tbl_doctor
+      set dname=#{dname}, dpass=#{dpass}, dimage=#{dimage}, daddress1=#{daddress1},
+      daddress2=#{daddress2}
+      where did=#{did}
+   </update>
+    <select id="list" resultType="com.example.domain.DoctorVO">
+        select * from tbl_doctor
+    </select>
+    <select id="read" resultType="com.example.domain.DoctorVO">
+        select * from tbl_doctor
+        where did=#{did}
+    </select>
+    <select id="mailcheck" resultType="com.example.domain.DoctorVO">
+        select * from tbl_doctor
+        where demail=#{demail}
+    </select>
+    <select id="nickcheck" resultType="com.example.domain.DoctorVO">
+        select * from tbl_doctor
+        where dnickname=#{dnickname}
+    </select>
+    <insert id="insert">
+       insert into tbl_doctor(did,dpass,dname,dnickname,dtel,dphone,demail,daddress1,daddress2,dimage,dhospital)
+       values(#{did}, #{dpass}, #{dname},#{dhospital},#{dtel},#{dphone},#{demail},#{daddress1},#{daddress2},#{address2},#{dimage},#{dhospital})
+    </insert>
+</mapper>

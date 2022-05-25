@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.UserMapper">
+   <update id="update">
+      update tbl_user
+      set uemail=#{uemail}, unickname=#{unickname}, uimage=#{uimage}, upass=#{upass}
+      where uid=#{uid}
+   </update>
+    <select id="list" resultType="com.example.domain.UserVO">
+        select * from tbl_user
+    </select>
+    <select id="read" resultType="com.example.domain.UserVO">
+        select * from tbl_user
+        where uid=#{uid}
+    </select>
+    <select id="id" resultType="com.example.domain.UserVO">
+        select * from tbl_user
+        where uid=#{uid}
+    </select>
+    <select id="mail" resultType="com.example.domain.UserVO">
+        select * from tbl_user
+        where uemail=#{uemail}
+    </select>
+    <select id="nick" resultType="com.example.domain.UserVO">
+        select * from tbl_user
+        where unickname=#{unickname}
+    </select>
+    <insert id="insert">
+       insert into tbl_user(uid,upass,uname,unickname,ubirth,ugender,uemail,uphone,uaddress1,uaddress2,upet,uadoptdate,uimage)
+       values(#{uid}, #{upass}, #{uname},#{unickname},#{ubirth},#{ugender},#{uemail},#{uphone},#{uaddress1},#{uaddress2},#{upet},#{uadoptdate},#{uimage})
+    </insert>
+    <select id="trade" resultType="com.example.domain.BuyVO">
+       select * from tbl_buy where uid=#{uid}
+       order by bdate desc
+    </select>
+    <select id="alltrade" resultType="com.example.domain.BuyVO">
+       select * from tbl_buy
+       order by bdate desc
+    </select>
+    <select id="idsearch" resultType="com.example.domain.UserVO">
+      select * from tbl_user
+      where uemail=#{uemail} and uid=#{uid}
+   </select>
+   <update id="newpass">
+      update tbl_user
+      set upass=#{upass}
+      where uid=#{uid}
+   </update>
+</mapper>

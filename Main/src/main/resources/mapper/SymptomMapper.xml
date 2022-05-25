@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.SymptomMapper">
+   <select id="count" resultType="int">
+        select count(*) from tbl_symptom
+         <if test="keyword !=null">
+        	where stitle like concat('%', #{keyword}, '%')
+       	 	or scontent like concat('%', #{keyword}, '%')
+        </if>
+    </select>
+     <select id="list" resultType="com.example.domain.SymptomVO">
+        select * from tbl_symptom
+        <if test="keyword != null">
+        	where stitle like concat('%', #{keyword}, '%')
+        	or scontent like concat('%', #{keyword}, '%')
+        </if>
+        order by sno desc
+        limit #{pageStart}, #{perPageNum}
+    </select>
+     <select id="read" resultType="com.example.domain.SymptomVO">
+       select * from tbl_symptom
+       where sno=#{sno}
+    </select>
+</mapper>

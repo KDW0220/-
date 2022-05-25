@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.AdoptMapper">
+	<select id="totalCount" resultType="int">
+		select count(*) from tbl_adopt
+	</select>
+    <select id="list" resultType="com.example.domain.AdoptVO">
+        select * from tbl_adopt
+       <if test="keyword !=null">
+           where title like concat('%', #{keyword}, '%')
+              or detail like concat('%', #{keyword}, '%')
+        </if>
+    </select>
+    <insert id="insert">
+    	insert into tbl_adopt(kinds,age,gender,neutering,detail,image,title)
+    	values(#{kinds}, #{age}, #{gender}, #{neutering}, #{detail}, #{image}, #{title})
+    </insert>
+    <select id="read" resultType="com.example.domain.AdoptVO">
+    	select * from tbl_adopt where ano=#{ano}
+    </select>
+    <delete id="delete">
+    	delete from tbl_adopt where ano=#{ano}
+    </delete>
+    <update id="update">
+    	update tbl_adopt
+    	set kinds=#{kinds}, age=#{age}, gender=#{gender}, neutering=#{neutering}, detail=#{detail}, image=#{image}, title=#{title}
+    	where ano=#{ano}
+    </update>
+     <select id="count" resultType="int">
+          select count(*) from tbl_adopt
+         	<if test="keyword!=null">
+	           where title like concat('%', #{keyword}, '%')
+	           or detail like concat('%', #{keyword}, '%')
+        	</if>
+    </select>
+</mapper>

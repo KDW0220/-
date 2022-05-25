@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.BreplyMapper">
+	<insert id="insert">
+		insert into tbl_breply(brreply, brreplyer, bno, uimage)
+		values(#{brreply}, #{brreplyer},#{bno},'uimage')
+	</insert>
+	<update id="update">
+		update tbl_breply set brreply=#{brreply}, brupdatedate=now()
+		where brno=#{brno}
+	</update>
+	<delete id="delete">
+		delete from tbl_breply where brno=#{brno}
+	</delete>
+    <select id="list" resultType="com.example.domain.BreplyVO">
+        select * from tbl_breply
+        where bno=#{bno}
+        order by brno desc
+        limit #{cri.pageStart}, #{cri.perPageNum}
+    </select>
+    <select id="count" resultType="int">
+    	select count(*) from tbl_breply
+    	where bno=#{bno}
+    </select>
+</mapper>

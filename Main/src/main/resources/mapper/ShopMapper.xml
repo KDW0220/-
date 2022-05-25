@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.ShopMapper">
+    <insert id="insert">
+       	insert into tbl_cart(uid,title, image, link, price)
+       	values(#{uid}, #{title}, #{image}, #{link}, #{price});
+    </insert>
+    <insert id="buy">
+       	insert into tbl_cart(uid,title, image, link, price)
+       	values(#{uid}, #{title}, #{image}, #{link}, #{price});
+    </insert>
+    <select id="check" resultType="com.example.domain.ShopVO">
+        select * from tbl_cart
+        where link = #{link}
+    </select>
+    <select id="total" resultType="int">
+       select count(*) from tbl_shop
+    </select>
+    <select id="read" resultType="com.example.domain.ShopVO">
+    	select * from tbl_shop 
+    	where id=#{id}
+    </select>
+    <delete id="delete">
+    	delete from tbl_shop where id=#{id}
+    </delete>
+    <update id="update">
+    	update tbl_shop
+    	set title=#{title},image=#{image},price=#{price},link=#{link}
+    	where id=#{id}
+    </update>
+    <select id="list" resultType="com.example.domain.ShopVO">
+        select * from tbl_shop
+        limit #{pageStart}, #{perPageNum}
+    </select>
+</mapper>
